@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF/Image Text Extractor</title>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>PDF/Image Text Extractor</h1>
+        <form action="/upload" class="dropzone" id="my-dropzone">
+            <div class="dz-message" data-dz-message>
+                <span>Drop files here or click to upload</span>
+            </div>
+        </form>
+        <div id="results"></div>
+        <div id="reprocess-form" style="display: none;">
+            <h2>Reprocess</h2>
+            <select id="file-select"></select>
+            <div>
+                <input type="checkbox" id="use-schema-checkbox" onclick="toggleSchema()">
+                <label for="use-schema-checkbox">Use Schema</label>
+            </div>
+            <textarea id="schema-input" placeholder="Enter schema here..." style="display: none;"></textarea>
+            <button id="reprocess-btn" onclick="reprocess()">Reprocess</button>
+        </div>
+    </div>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script>
+        function toggleSchema() {
+            const schemaInput = document.getElementById('schema-input');
+            const useSchema = document.getElementById('use-schema-checkbox').checked;
+            schemaInput.style.display = useSchema ? 'block' : 'none';
+        }
+
+        function reprocess() {
+            const filename = document.getElementById('file-select').value;
+            const useSchema = document.getElementById('use-schema-checkbox').checked;
+            const schema = document.getElementById('schema-input').value;
+
+            const data = {
+                filename: filename,
+                use_schema: useSchema,
+                schema: schema
+            };
+
+            fetch('/reprocess', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            }).then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Reprocessed successfully! File: " + data.filename);
+                } else {
+                    alert("Error: " + data.error);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

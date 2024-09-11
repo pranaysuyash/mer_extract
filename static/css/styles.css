@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+.dropzone {
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+}
+
+.dropzone .dz-message {
+    font-weight: 400;
+}
+
+.dropzone .dz-message .note {
+    font-size: 0.8em;
+    font-weight: 200;
+    display: block;
+    margin-top: 1.4rem;
+}
+
+#results {
+    margin-top: 20px;
+}
+
+.result-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#reprocess-form {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+#file-select, #schema-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#schema-input {
+    height: 100px;
+}
+
+#reprocess-btn {
+    background-color: #0087F7;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#reprocess-btn:hover {
+    background-color: #0069c0;
+}
